@@ -1,0 +1,42 @@
+
+default
+xkb_symbols "basic" {
+
+    include "%CURRENT_LAYOUT%"
+
+    name[Group2]="Programming";
+
+    override key <AC01> {
+        symbols[Group2]= [       apostrophe ]
+    };
+    override key <AC02> {
+        symbols[Group2]= [       quotedbl ]
+    };
+    override key <AC03> {
+        symbols[Group2]= [       backslash ]
+    };
+    override key <AC04> {
+        symbols[Group2]= [     bracketleft ]
+    };
+    override key <AC05> {
+        symbols[Group2]= [    bracketright ]
+    };
+    override key <AC06> {
+        symbols[Group2]= [           grave ]
+    };
+    override key <AC07> {
+        symbols[Group2]= [       braceleft ]
+    };
+    override key <AC08> {
+        symbols[Group2]= [      braceright ]
+    };
+    override key <AC09> {
+        symbols[Group2]= [           slash ]
+    };
+    override key <AC10> {
+        symbols[Group2]= [       semicolon ]
+    };
+
+    override key <CAPS> {         [     Mode_switch, Caps_Lock ] };
+
+};
