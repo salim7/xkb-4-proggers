@@ -36,6 +36,9 @@ xkb_symbols "basic" {
     override key <AC10> {
         symbols[Group2]= [       semicolon ]
     };
+    override key <AC11> {
+        symbols[Group2]= [       End ]
+    };
 
     override key <CAPS> {         [     Mode_switch, Caps_Lock ] };
 

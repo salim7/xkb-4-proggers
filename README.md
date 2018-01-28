@@ -17,6 +17,7 @@ I personally didn't use the caps-lock key often (AND I DON'T RECOMMEND TO). Howe
 | `[CAPS-LOCK]+[K]` | brace right | } |
 | `[CAPS-LOCK]+[L]` | slash | / |
 | `[CAPS-LOCK]+[Ö]` | semicolon | ; |
+| `[CAPS-LOCK]+[Ä]` | End | |
 
 These new key combinations speed up your typing speed especially when writing code.
 
