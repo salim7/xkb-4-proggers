@@ -24,7 +24,7 @@ These new key combinations speed up your typing speed especially when writing co
 ## Setup
  * Requirements: (Ubuntu?) Linux
  * Download or clone the repository: `git clone git@github.com:salim7/xkb-4-proggers.git`
- * Ensure your current keyboard layout shall be the base
+ * Ensure your current keyboard layout is the one you usually use (it will be the base layout)
  * Run install script: `./install.sh`, continue
  * Go to Gnome Settings, Text Input and add the new layout to your input source. You may want to make it the default one.
  * Enjoy!
