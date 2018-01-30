@@ -2,7 +2,7 @@
 default
 xkb_symbols "basic" {
 
-    include "%CURRENT_LAYOUT%"
+    include "%BASE_LAYOUT%"
 
     name[Group2]="Programming";
 
@@ -31,13 +31,13 @@ xkb_symbols "basic" {
         symbols[Group2]= [      braceright ]
     };
     override key <AC09> {
-        symbols[Group2]= [           slash ]
-    };
-    override key <AC10> {
         symbols[Group2]= [       semicolon ]
     };
+    override key <AC10> {
+        symbols[Group2]= [           slash ]
+    };
     override key <AC11> {
-        symbols[Group2]= [       End ]
+        symbols[Group2]= [             End ]
     };
 
     override key <CAPS> {         [     Mode_switch, Caps_Lock ] };

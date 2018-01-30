@@ -8,7 +8,7 @@ EVDEV_RULE="/usr/share/X11/xkb/rules/evdev"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # get current keyboard layout
-CURRENT_LAYOUT=$(setxkbmap -v | awk -F "+" '/symbols/ {print $2}')
+BASE_LAYOUT=$(setxkbmap -v | awk -F "+" '/symbols/ {print $2}')
 
 clear
 echo "=============================================="
@@ -30,18 +30,21 @@ echo " * [CAPS-LOCK]+[G]: ]"
 echo " * [CAPS-LOCK]+[H]: \`"
 echo " * [CAPS-LOCK]+[J]: {"
 echo " * [CAPS-LOCK]+[K]: }"
-echo " * [CAPS-LOCK]+[L]: /"
-echo " * [CAPS-LOCK]+[Ö]: ;"
+echo " * [CAPS-LOCK]+[L]: ;"
+echo " * [CAPS-LOCK]+[Ö]: /"
+echo " * [CAPS-LOCK]+[Ä]: End"
 
 echo ""
-read -p "Your current layout ($CURRENT_LAYOUT) will be used as a basis. Continue? [Y/n] " -n 1 -r
+echo "Your current layout is: $BASE_LAYOUT"
+read -p "Layout to be used as a basis: " -e -i "$BASE_LAYOUT" -r
 echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Nn]$ ]]
+if [[ $REPLY =~ ^$ ]]
 then
   echo "Cancelled"
   echo
   exit
 fi
+BASE_LAYOUT=$REPLY
 
 
 # copy the template
@@ -50,7 +53,7 @@ echo "==> preparing the new layout..."
 cp $DIR/prg.template $DIR/prg
 
 # replace the current keyboard layout in layout template
-sed -i -e "s/%CURRENT_LAYOUT%/${CURRENT_LAYOUT}/g" $DIR/prg
+sed -i -e "s/%BASE_LAYOUT%/${BASE_LAYOUT}/g" $DIR/prg
 echo "==> created new keyboard layout: $DIR/prg"
 
 echo ""
@@ -70,7 +73,7 @@ NEW_EVDEV_LAYOUT="  <layout>\\
       <configItem>\\
         <name>prg<\/name>\\
         <shortDescription>pr<\/shortDescription>\\
-        <description>${CURRENT_LAYOUT}-Programming<\/description>\\
+        <description>${BASE_LAYOUT}-Programming<\/description>\\
       <\/configItem>\\
     <\/layout>\\
   <\/layoutList>"
@@ -90,8 +93,8 @@ fi
 echo ""
 echo -n "==> Modifying evdev-rules..."
 NEW_EVDEV_RULE="\\
- * $CURRENT_LAYOUT = +$CURRENT_LAYOUT"
-if grep -q "\\s\+\\*\\s\+$CURRENT_LAYOUT\\s\+=\\s\++$CURRENT_LAYOUT" $EVDEV_RULE
+ * $BASE_LAYOUT = +$BASE_LAYOUT"
+if grep -q "\\s\+\\*\\s\+$BASE_LAYOUT\\s\+=\\s\++$BASE_LAYOUT" $EVDEV_RULE
 then
   echo ""
   echo "WARN: $EVDEV_RULE already modified... skipping"
@@ -106,5 +109,5 @@ sudo dpkg-reconfigure xkb-data
 
 echo ""
 echo "=============================================="
-echo "> Done. You can now use your new keyboard layout. Go to the input settings and add: ${CURRENT_LAYOUT}-Programming"
+echo "> Done. You can now use your new keyboard layout. Go to the input settings and add: ${BASE_LAYOUT}-Programming"
 echo ""
